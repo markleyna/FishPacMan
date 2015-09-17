@@ -1,0 +1,613 @@
+Public Class Form1
+    Structure topTen
+        Dim initial As String
+        Dim score As Integer
+    End Structure
+    Dim food As Integer = 89
+    Public arrTopTen(11) As topTen
+    Public arrFood(89) As PowerPacks.RectangleShape
+    Private Sub frmAnimatedGame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim line As String
+        AddHandler Me.PreviewKeyDown, AddressOf Me.frmAnimatedGame_PreviewKeyDown
+        AddHandler Me.KeyDown, AddressOf Me.frmAnimatedGame_KeyDown
+        AddHandler timerShark1.Tick, AddressOf OnTimedEvent
+        FileOpen(1, "E:\CP 2\net\Scrabble\TopTen.txt", OpenMode.Input)
+        For i = 1 To 10
+            line = Trim(LineInput(1))
+            arrTopTen(i).initial = Mid(line, 1, 2)
+            arrTopTen(i).score = Val(Mid(line, 4))
+        Next
+        For f = 1 To 10
+            lBoxTopTen.Items.Add(arrTopTen(f).initial + " " + Str(arrTopTen(f).score))
+        Next
+        FileClose(1)
+        arrFood(1) = picFood1
+        arrFood(2) = picFood2
+        arrFood(3) = picFood3
+        arrFood(4) = picFood4
+        arrFood(5) = picFood5
+        arrFood(6) = picFood6
+        arrFood(7) = picFood7
+        arrFood(8) = picFood8
+        arrFood(9) = picFood9
+        arrFood(10) = picFood10
+        arrFood(11) = picFood11
+        arrFood(12) = picFood12
+        arrFood(13) = picFood13
+        arrFood(14) = picFood14
+        arrFood(15) = picFood15
+        arrFood(16) = picFood16
+        arrFood(17) = picFood17
+        arrFood(18) = picFood18
+        arrFood(19) = picFood19
+        arrFood(20) = picFood20
+        arrFood(21) = picFood21
+        arrFood(22) = picFood22
+        arrFood(23) = picFood23
+        arrFood(24) = picFood24
+        arrFood(25) = picFood25
+        arrFood(26) = picFood26
+        arrFood(27) = picFood27
+        arrFood(28) = picFood28
+        arrFood(29) = picFood29
+        arrFood(30) = picFood30
+        arrFood(31) = picFood31
+        arrFood(32) = picFood32
+        arrFood(33) = picFood33
+        arrFood(34) = picFood34
+        arrFood(35) = picFood35
+        arrFood(36) = picFood36
+        arrFood(37) = picFood37
+        arrFood(38) = picFood38
+        arrFood(39) = picFood39
+        arrFood(40) = picFood40
+        arrFood(41) = picFood41
+        arrFood(42) = picFood42
+        arrFood(43) = picFood43
+        arrFood(44) = picFood44
+        arrFood(45) = picFood45
+        arrFood(46) = picFood46
+        arrFood(47) = picFood47
+        arrFood(48) = picFood48
+        arrFood(49) = picFood49
+        arrFood(50) = picFood50
+        arrFood(51) = picFood51
+        arrFood(52) = picFood52
+        arrFood(53) = picFood53
+        arrFood(54) = picFood54
+        arrFood(55) = picFood55
+        arrFood(56) = picFood56
+        arrFood(57) = picFood57
+        arrFood(58) = picFood58
+        arrFood(59) = picFood59
+        arrFood(60) = picFood60
+        arrFood(61) = picFood61
+        arrFood(62) = picFood62
+        arrFood(63) = picFood63
+        arrFood(64) = picFood64
+        arrFood(65) = picFood65
+        arrFood(66) = picFood66
+        arrFood(67) = picFood67
+        arrFood(68) = picFood68
+        arrFood(69) = picFood69
+        arrFood(60) = picFood60
+        arrFood(70) = picFood70
+        arrFood(71) = picFood71
+        arrFood(72) = picFood72
+        arrFood(73) = picFood73
+        arrFood(74) = picFood74
+        arrFood(75) = picFood75
+        arrFood(76) = picFood76
+        arrFood(77) = picFood77
+        arrFood(78) = picFood78
+        arrFood(79) = picFood79
+        arrFood(80) = picFood80
+        arrFood(81) = picFood81
+        arrFood(82) = picFood82
+        arrFood(83) = picFood83
+        arrFood(84) = picFood84
+        arrFood(85) = picFood85
+        arrFood(86) = picFood86
+        arrFood(87) = picFood87
+        arrFood(88) = picFood88
+        arrFood(89) = picFood89
+    End Sub
+    Private Sub frmAnimatedGame_PreviewKeyDown(ByVal sender As Object, ByVal e As PreviewKeyDownEventArgs)
+        Select Case (e.KeyCode)
+            Case Keys.Down, Keys.Up, Keys.Right, Keys.Left
+                e.IsInputKey = True
+        End Select
+    End Sub
+    Private Sub frmAnimatedGame_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs)
+        If e.KeyCode = Keys.Left Then
+            If shpGoldy.Left = 10 Then
+                If shpGoldy.Top = 310 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 110 Then
+                If shpGoldy.Top <> 60 And shpGoldy.Top <> 360 And shpGoldy.Top <> 410 And shpGoldy.Top <> 510 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 160 Then
+                If shpGoldy.Top <> 160 And shpGoldy.Top <> 210 And shpGoldy.Top <> 260 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 210 Then
+                If shpGoldy.Top <> 410 And shpGoldy.Top <> 460 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 260 Then
+                If shpGoldy.Top <> 310 And shpGoldy.Top <> 360 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 310 Then
+                If shpGoldy.Top <> 460 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 360 Then
+                If shpGoldy.Top <> 160 And shpGoldy.Top <> 210 And shpGoldy.Top <> 310 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 410 Then
+                If shpGoldy.Top <> 60 And shpGoldy.Top <> 360 And shpGoldy.Top <> 410 And shpGoldy.Top <> 460 And shpGoldy.Top <> 560 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 460 Then
+                If shpGoldy.Top <> 210 And shpGoldy.Top <> 260 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 510 Then
+                If shpGoldy.Top <> 60 And shpGoldy.Top <> 160 And shpGoldy.Top <> 360 And shpGoldy.Top <> 410 And shpGoldy.Top <> 510 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 60 Then
+                MoveGoldy(e)
+            End If
+        End If
+
+        If e.KeyCode = Keys.Up Then
+            If shpGoldy.Top = 110 Then
+                If shpGoldy.Left <> 60 And shpGoldy.Left <> 160 And shpGoldy.Left <> 210 And shpGoldy.Left <> 260 And shpGoldy.Left <> 310 And shpGoldy.Left <> 360 And shpGoldy.Left <> 460 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Top = 210 Then
+                If shpGoldy.Left <> 60 And shpGoldy.Left <> 460 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Top = 260 Then
+                If shpGoldy.Left <> 210 And shpGoldy.Left <> 260 And shpGoldy.Left <> 310 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Top = 310 Then
+                If shpGoldy.Left <> 110 And shpGoldy.Left <> 410 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Top = 410 Then
+                If shpGoldy.Left <> 210 And shpGoldy.Left <> 310 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Top = 460 Then
+                If shpGoldy.Left <> 60 And shpGoldy.Left <> 460 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Top = 510 Then
+                If shpGoldy.Left <> 160 And shpGoldy.Left <> 260 And shpGoldy.Left <> 360 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Top = 560 Then
+                If shpGoldy.Left <> 60 And shpGoldy.Left <> 460 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Top = 60 Or shpGoldy.Top = 160 Or shpGoldy.Top = 360 Then
+                MoveGoldy(e)
+            End If
+        End If
+
+        If e.KeyCode = Keys.Right Then
+            If shpGoldy.Left = 510 Then
+                If shpGoldy.Top = 310 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 410 Then
+                If shpGoldy.Top <> 60 And shpGoldy.Top <> 360 And shpGoldy.Top <> 410 And shpGoldy.Top <> 510 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 360 Then
+                If shpGoldy.Top <> 160 And shpGoldy.Top <> 210 And shpGoldy.Top <> 260 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 310 Then
+                If shpGoldy.Top <> 410 And shpGoldy.Top <> 460 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 260 Then
+                If shpGoldy.Top <> 310 And shpGoldy.Top <> 360 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 210 Then
+                If shpGoldy.Top <> 460 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 160 Then
+                If shpGoldy.Top <> 160 And shpGoldy.Top <> 210 And shpGoldy.Top <> 310 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 110 Then
+                If shpGoldy.Top <> 60 And shpGoldy.Top <> 360 And shpGoldy.Top <> 410 And shpGoldy.Top <> 460 And shpGoldy.Top <> 560 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 60 Then
+                If shpGoldy.Top <> 210 And shpGoldy.Top <> 260 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 10 Then
+                If shpGoldy.Top <> 60 And shpGoldy.Top <> 160 And shpGoldy.Top <> 360 And shpGoldy.Top <> 410 And shpGoldy.Top <> 510 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Left = 460 Then
+                MoveGoldy(e)
+            End If
+        End If
+
+        If e.KeyCode = Keys.Down Then
+            If shpGoldy.Top = 10 Then
+                If shpGoldy.Left <> 60 And shpGoldy.Left <> 160 And shpGoldy.Left <> 210 And shpGoldy.Left <> 260 And shpGoldy.Left <> 310 And shpGoldy.Left <> 360 And shpGoldy.Left <> 460 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Top = 110 Then
+                If shpGoldy.Left <> 60 And shpGoldy.Left <> 110 And shpGoldy.Left <> 210 And shpGoldy.Left <> 260 And shpGoldy.Left <> 310 And shpGoldy.Left <> 410 And shpGoldy.Left <> 460 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Top = 260 Then
+                If shpGoldy.Left <> 210 And shpGoldy.Left <> 310 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Top = 310 Then
+                If shpGoldy.Left <> 60 And shpGoldy.Left <> 160 And shpGoldy.Left <> 360 And shpGoldy.Left <> 460 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Top = 410 Then
+                If shpGoldy.Left <> 260 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Top = 460 Then
+                If shpGoldy.Left <> 60 And shpGoldy.Left <> 460 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Top = 510 Then
+                If shpGoldy.Left <> 160 And shpGoldy.Left <> 210 And shpGoldy.Left <> 260 And shpGoldy.Left <> 310 And shpGoldy.Left <> 360 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Top = 560 Then
+                If shpGoldy.Left <> 10 And shpGoldy.Left <> 60 And shpGoldy.Left <> 110 And shpGoldy.Left <> 410 And shpGoldy.Left <> 460 And shpGoldy.Left <> 510 Then
+                    MoveGoldy(e)
+                End If
+            ElseIf shpGoldy.Top = 60 Or shpGoldy.Top = 160 Or shpGoldy.Top = 210 Or shpGoldy.Top = 360 Then
+                MoveGoldy(e)
+            End If
+        End If
+    End Sub
+    Private Sub MoveGoldy(ByVal e As System.Windows.Forms.KeyEventArgs)
+        Dim i As Integer
+        Dim pos As Integer
+        timerShark1.Enabled = True
+        If e.KeyCode = Keys.Up Then
+            shpGoldy.Top += -50
+        ElseIf e.KeyCode = Keys.Left Then
+            If shpGoldy.Left = 10 Then
+                shpGoldy.Left = 510
+            Else
+                shpGoldy.Left += -50
+            End If
+        ElseIf e.KeyCode = Keys.Right Then
+            If shpGoldy.Left = 510 Then
+                shpGoldy.Left = 10
+            Else
+                shpGoldy.Left += 50
+            End If
+        ElseIf e.KeyCode = Keys.Down Then
+            shpGoldy.Top += 50
+        End If
+
+        For i = 1 To 89
+            If arrFood(i).Left = shpGoldy.Left And arrFood(i).Top = shpGoldy.Top Then
+                pos = i
+            End If
+        Next
+        If arrFood(pos).Visible = True Then
+            arrFood(pos).Visible = False
+            food += -1
+        End If
+        If shpGoldy.Left = shpShark1.Left And shpGoldy.Top = shpShark1.Top Then
+            timerShark1.Enabled = False
+            MsgBox("The shark ate you.", vbOKOnly, "End Game")
+            Reset()
+        End If
+        If food = 0 Then
+            MsgBox("You've won", vbOKOnly, "Game Over")
+            Reset()
+        End If
+    End Sub
+    Private Sub OnTimedEvent(source As Object, ByVal e As EventArgs) Handles timerShark1.Tick
+        SharkAhead()
+    End Sub
+    Private Sub SharkAhead()
+        Dim possible As Boolean = False
+        Dim before As Integer
+        If shpShark1.Left = 260 And shpShark1.Top = 160 Then
+            shpShark1.Top += -50
+            Exit Sub
+        End If
+        If shpGoldy.Left < shpShark1.Left Then
+            before = shpShark1.Left
+            checkLeft(possible)
+            If before <> shpShark1.Left Then
+                Exit Sub
+            End If
+        ElseIf shpGoldy.Top > shpShark1.Top Then
+            before = shpShark1.Top
+            checkDown(possible)
+            If before <> shpShark1.Top Then
+                Exit Sub
+            End If
+        Else
+            before = shpShark1.Left
+            checkRight(possible)
+            If before <> shpShark1.Left Then
+                Exit Sub
+            End If
+            checkUp(possible)
+        End If
+    End Sub
+    Private Sub moveShark(dir As Integer)
+        If dir = 1 Then
+            If shpShark1.Left = 10 Then
+                shpShark1.Left = 510
+            Else
+                shpShark1.Left += -50
+            End If
+        ElseIf dir = 2 Then
+            shpShark1.Top += -50
+        ElseIf dir = 3 Then
+            If shpShark1.Left = 510 Then
+                shpShark1.Left = 10
+            Else
+                shpShark1.Left += 50
+            End If
+        Else
+            shpShark1.Top += 50
+        End If
+        If shpGoldy.Left = shpShark1.Left And shpGoldy.Top = shpShark1.Top Then
+            timerShark1.Enabled = False
+            MsgBox("The shark ate you.", vbOKOnly, "End Game")
+            Reset()
+        End If
+    End Sub
+    Private Sub checkLeft(possible As Boolean)
+        Dim dir As Integer = 1
+        If shpShark1.Left = 10 Then
+            If shpShark1.Top = 310 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 110 Then
+            If shpShark1.Top <> 60 And shpShark1.Top <> 360 And shpShark1.Top <> 410 And shpShark1.Top <> 510 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 160 Then
+            If shpShark1.Top <> 160 And shpShark1.Top <> 210 And shpShark1.Top <> 260 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 210 Then
+            If shpShark1.Top <> 410 And shpShark1.Top <> 460 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 260 Then
+            If shpShark1.Top <> 310 And shpShark1.Top <> 360 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 310 Then
+            If shpShark1.Top <> 460 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 360 Then
+            If shpShark1.Top <> 160 And shpShark1.Top <> 210 And shpShark1.Top <> 310 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 410 Then
+            If shpShark1.Top <> 60 And shpShark1.Top <> 360 And shpShark1.Top <> 410 And shpShark1.Top <> 460 And shpShark1.Top <> 560 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 460 Then
+            If shpShark1.Top <> 210 And shpShark1.Top <> 260 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 510 Then
+            If shpShark1.Top <> 60 And shpShark1.Top <> 160 And shpShark1.Top <> 360 And shpShark1.Top <> 410 And shpShark1.Top <> 510 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 60 Then
+            possible = True
+        End If
+        If possible = True Then
+            moveShark(dir)
+        End If
+    End Sub
+    Private Sub checkUp(possible As Boolean)
+        Dim dir As Integer = 2
+        If shpShark1.Top = 110 Then
+            If shpShark1.Left <> 60 And shpShark1.Left <> 160 And shpShark1.Left <> 210 And shpShark1.Left <> 260 And shpShark1.Left <> 310 And shpShark1.Left <> 360 And shpShark1.Left <> 460 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Top = 210 Then
+            If shpShark1.Left <> 60 And shpShark1.Left <> 460 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Top = 260 Then
+            If shpShark1.Left <> 210 And shpShark1.Left <> 260 And shpShark1.Left <> 310 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Top = 310 Then
+            If shpShark1.Left <> 110 And shpShark1.Left <> 410 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Top = 410 Then
+            If shpShark1.Left <> 210 And shpShark1.Left <> 310 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Top = 460 Then
+            If shpShark1.Left <> 60 And shpShark1.Left <> 460 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Top = 510 Then
+            If shpShark1.Left <> 160 And shpShark1.Left <> 260 And shpShark1.Left <> 360 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Top = 560 Then
+            If shpShark1.Left <> 60 And shpShark1.Left <> 460 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Top = 60 Or shpShark1.Top = 160 Or shpShark1.Top = 360 Then
+            possible = True
+        End If
+        If possible = True Then
+            moveShark(dir)
+        End If
+    End Sub
+    Private Sub checkRight(possible)
+        Dim dir As Integer = 3
+        If shpShark1.Left = 510 Then
+            If shpShark1.Top = 310 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 410 Then
+            If shpShark1.Top <> 60 And shpShark1.Top <> 360 And shpShark1.Top <> 410 And shpShark1.Top <> 510 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 360 Then
+            If shpShark1.Top <> 160 And shpShark1.Top <> 210 And shpShark1.Top <> 260 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 310 Then
+            If shpShark1.Top <> 410 And shpShark1.Top <> 460 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 260 Then
+            If shpShark1.Top <> 310 And shpShark1.Top <> 360 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 210 Then
+            If shpShark1.Top <> 460 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 160 Then
+            If shpShark1.Top <> 160 And shpShark1.Top <> 210 And shpShark1.Top <> 310 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 110 Then
+            If shpShark1.Top <> 60 And shpShark1.Top <> 360 And shpShark1.Top <> 410 And shpShark1.Top <> 460 And shpShark1.Top <> 560 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 60 Then
+            If shpShark1.Top <> 210 And shpShark1.Top <> 260 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 10 Then
+            If shpShark1.Top <> 60 And shpShark1.Top <> 160 And shpShark1.Top <> 360 And shpShark1.Top <> 410 And shpShark1.Top <> 510 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Left = 460 Then
+            possible = True
+        End If
+        If possible = True Then
+            moveShark(dir)
+        End If
+    End Sub
+    Private Sub checkDown(possible)
+        Dim dir As Integer = 4
+        If shpShark1.Top = 10 Then
+            If shpShark1.Left <> 60 And shpShark1.Left <> 160 And shpShark1.Left <> 210 And shpShark1.Left <> 260 And shpShark1.Left <> 310 And shpShark1.Left <> 360 And shpShark1.Left <> 460 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Top = 110 Then
+            If shpShark1.Left <> 60 And shpShark1.Left <> 110 And shpShark1.Left <> 210 And shpShark1.Left <> 260 And shpShark1.Left <> 310 And shpShark1.Left <> 410 And shpShark1.Left <> 460 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Top = 260 Then
+            If shpShark1.Left <> 210 And shpShark1.Left <> 310 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Top = 310 Then
+            If shpShark1.Left <> 60 And shpShark1.Left <> 160 And shpShark1.Left <> 360 And shpShark1.Left <> 460 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Top = 410 Then
+            If shpShark1.Left <> 260 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Top = 460 Then
+            If shpShark1.Left <> 60 And shpShark1.Left <> 460 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Top = 510 Then
+            If shpShark1.Left <> 160 And shpShark1.Left <> 210 And shpShark1.Left <> 260 And shpShark1.Left <> 310 And shpShark1.Left <> 360 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Top = 560 Then
+            If shpShark1.Left <> 10 And shpShark1.Left <> 60 And shpShark1.Left <> 110 And shpShark1.Left <> 410 And shpShark1.Left <> 460 And shpShark1.Left <> 510 Then
+                possible = True
+            End If
+        ElseIf shpShark1.Top = 60 Or shpShark1.Top = 160 Or shpShark1.Top = 210 Or shpShark1.Top = 360 Then
+            possible = True
+        End If
+        If possible = True Then
+            moveShark(dir)
+        End If
+    End Sub
+    Private Sub Reset()
+        Dim i As Integer
+        lblScore.Text = "Score: " + Str(89 - food)
+        shpGoldy.Left = 260
+        shpGoldy.Top = 460
+        shpShark1.Left = 260
+        shpShark1.Top = 160
+        For i = 1 To 89
+            arrFood(i).Visible = True
+        Next
+        inputTopTen()
+    End Sub
+    Private Sub inputTopTen()
+        Dim f As Integer
+        Dim swap As Boolean
+        Dim b As Integer
+        Dim temp As topTen
+
+        If Val(89 - food) > arrTopTen(10).score Then
+            arrTopTen(11).initial = Mid(Trim(InputBox("What are your initials?", "Top Ten")), 1, 2)
+            arrTopTen(11).score = Val(89 - food)
+            lBoxTopTen.Items.Clear()
+            b = 10
+            Do
+                swap = False
+                For f = 1 To b
+                    If arrTopTen(f).score < arrTopTen(f + 1).score Then
+                        temp = arrTopTen(f)
+                        arrTopTen(f) = arrTopTen(f + 1)
+                        arrTopTen(f + 1) = temp
+                        swap = True
+                    End If
+                Next f
+                b = b - 1
+            Loop Until Not swap
+            For f = 1 To 11
+                lBoxTopTen.Items.Add(arrTopTen(f).initial + "    " + Str(arrTopTen(f).score))
+            Next
+
+            FileOpen(1, "E:\CP 2\net\Scrabble\TopTen.txt", OpenMode.Output)
+            For i = 1 To 10
+                PrintLine(1, arrTopTen(i).initial + " " + Str(arrTopTen(i).score))
+            Next
+            FileClose(1)
+        End If
+        food = 89
+    End Sub
+End Class
